@@ -1,11 +1,13 @@
 <script lang="ts">
-    import { Container, Col } from "sveltestrap";
+    import { Container, Col, Button } from "sveltestrap";
     import { get as getPropertyByID } from "../properties/getPropertyByID"
     import { Chasing } from 'svelte-loading-spinners'
     import Carousel from "../../components/Carousel.svelte";
+    import ContactForm from "../../components/ContactForm.svelte";
     import { page } from "$app/stores";
 
     let propertyID = $page.params.id;
+    let isModalOpen = false;
     $: propertyPromise = getPropertyByID(propertyID);
 </script>
 
@@ -30,12 +32,15 @@
                     <h4>Location</h4>
                     <p>{value.body.location['name']}</p>
                 </div>
+                <Button on:click={() => {isModalOpen = !isModalOpen}}>Contact</Button>
             </Col>
         </Col>
+        <ContactForm isOpen={isModalOpen} property_id={value.body.public_id}></ContactForm>
     {:catch _}
         <h3>We couldn't find that cool property...</h3>
     {/await}
 </Container>
+
 
 <style>
     :global(.propertyContent__propertyContainer){
