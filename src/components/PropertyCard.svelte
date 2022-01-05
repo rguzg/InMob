@@ -20,7 +20,7 @@
             <b>Location: </b> <p>{property.location}</p>
         </Col>
       <Col class="m-3" md={12}>
-        <a href="/properties/{property.public_id}"><Button>View Details</Button></a>
+        <a href="/property/{property.public_id}"><Button>View Details</Button></a>
       </Col>
     </CardBody>
 </Card>
